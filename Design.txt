@@ -1,0 +1,18 @@
+/** 
+       Header
+          - Logo
+          - Navbar (Right Side)
+          - Cart
+       Body
+          - Search Bar
+          - RestrauntList
+          - RestaurantCard
+                 - Image
+                 - Name
+                 - Rating
+                 - Cusines
+       Footer 
+          - Links
+          - Copyrights
+          
+*/
