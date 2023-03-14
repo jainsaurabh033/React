@@ -2,12 +2,9 @@ import RestaurantCard from "./RestaurantCard";
 //import { burgerKing } from "./contants";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
-
-function filterdata(searchText, restaurants) {
-  return restaurants.filter((restaurant) =>
-    restaurant?.data?.name?.toLowerCase()?.includes(searchText.toLowerCase())
-  );
-}
+import { Link } from "react-router-dom";
+import { filterdata } from "../utils/helper";
+import useOnline from "../utils/useOnline";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -33,10 +30,10 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search-container">
+      <div className="search-container p-5 bg-slate-700 my-5">
         <input
           type="text"
-          className="search-input"
+          className="focus:bg-green-100 p-2 m-2"
           placeholder="Search"
           value={searchText}
           onChange={(e) => {
@@ -44,7 +41,7 @@ const Body = () => {
           }}
         />
         <button
-          className="search-btn"
+          className="search-btn py-2 m-2 bg-purple-500 rounded text-white"
           onClick={() => {
             const data = filterdata(searchText, allRestaurants);
             setfilteredRestaurants(data);
@@ -53,10 +50,15 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="restaurant-list">
+      <div className="flex flex-wrap justify-center">
         {filteredRestaurants.map((restaurant) => {
           return (
-            <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
+            <Link
+              to={"/restaurant/" + restaurant.data.id}
+              key={restaurant.data.id}
+            >
+              <RestaurantCard {...restaurant.data} />
+            </Link>
           );
         })}
       </div>
